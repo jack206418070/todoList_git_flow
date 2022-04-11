@@ -3,26 +3,28 @@ const { v4: uuidv4 } = require('uuid');
 const { headers } = require('./libs');
 const errorHandle = require('./errorHandle');
 const postTodo = require('./postTodo');
+const getTodo = require('./getTodo');
 const todos = [];
 
-const requestListener = (req, res)=>{
-    
-    if(req.url=="/todos" && req.method == "GET"){
+const requestListener = (req, res) => {
+
+    if (req.url == "/todos" && req.method == "GET") {
         // getTodo.js
-    }else if(req.url=="/todos" && req.method == "POST"){
+        getTodo(res, headers, todos);
+    } else if (req.url == "/todos" && req.method == "POST") {
         // postTodo.js
         postTodo(req, res, todos);
-    }else if(req.url=="/todos" && req.method == "DELETE"){
+    } else if (req.url == "/todos" && req.method == "DELETE") {
         // deleteTodo.js
-    }else if(req.url.startsWith("/todos/") && req.method=="DELETE"){
+    } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
         // deleteTodo.js
-    }else if(req.url.startsWith("/todos/") && req.method=="PATCH"){
+    } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
         // patchTodo.js
-    }else if(req.method == "OPTIONS"){
-        res.writeHead(200,headers);
+    } else if (req.method == "OPTIONS") {
+        res.writeHead(200, headers);
         res.end();
-    }else{
-        res.writeHead(404,headers);
+    } else {
+        res.writeHead(404, headers);
         res.write(JSON.stringify({
             "status": "false",
             "message": "無此網站路由"
