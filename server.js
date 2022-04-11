@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { headers } = require('./libs');
 const errorHandle = require('./errorHandle');
 const postTodo = require('./postTodo');
+const getTodo = require('./getTodo');
 const todos = [];
 
 const requestListener = (req, res) => {
